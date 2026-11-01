@@ -26,7 +26,8 @@ def make_depth(clear_bgr):
 def add_haze(clear_bgr, beta, seed, A=(0.86, 0.89, 0.92), noise=0.005):
     """按大气散射模型 I = J*t + A*(1-t) 合成雾图。
 
-    beta 越大雾越重。返回值是 uint8 雾图、深度图和透射率。
+    beta 越大雾越重。A 按 BGR 顺序给出，即 A=(A_b, A_g, A_r)。
+    返回值是 uint8 雾图、深度图和透射率。
     """
     rng = np.random.default_rng(seed)
     clear = clear_bgr.astype(np.float32) / 255.0

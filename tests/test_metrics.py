@@ -7,7 +7,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from src.metrics import psnr, ssim  # noqa: E402
+from src.metrics import entropy, psnr, ssim  # noqa: E402
 from src.sky import dark_channel  # noqa: E402
 
 
@@ -26,6 +26,13 @@ class TestMetrics(unittest.TestCase):
         rng = np.random.default_rng(0)
         img = rng.integers(0, 256, (16, 16, 3), dtype=np.uint8)
         self.assertAlmostEqual(ssim(img, img), 1.0, places=5)
+
+    def test_entropy_float_matches_uint8(self):
+        rng = np.random.default_rng(0)
+        img = rng.integers(0, 256, (32, 32, 3), dtype=np.uint8)
+        self.assertAlmostEqual(
+            entropy(img), entropy(img.astype(np.float32) / 255.0), places=2
+        )
 
     def test_dark_channel_shape(self):
         img = np.ones((20, 30, 3), dtype=np.float32)

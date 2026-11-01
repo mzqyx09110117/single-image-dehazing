@@ -2,6 +2,8 @@
 
 这是图像处理课程设计。基线是 He 等人 2009 年提出的暗通道先验（Dark Channel Prior, DCP），参考了 [He-Zhang/image_dehaze](https://github.com/He-Zhang/image_dehaze) 的 MIT 实现；代码按论文重新写成了几个小模块，并在此基础上做了几处修改。
 
+作者：祁震淼（东北大学，20245627@stu.neu.edu.cn）
+
 ## 环境
 
 - Python 3.10+
@@ -103,7 +105,7 @@ print(info["A"], info["omega"], info["sky_ratio"])
 | 基线 | 22.20 | 0.832 |
 | +天空大气光 | 22.26 | 0.832 |
 | +自适应 ω | 22.31 | 0.829 |
-| +窗口 41 | 22.56 | 0.839 |
+| +窗口 41 | 22.56 | 0.840 |
 | +t0=0.35 | 22.51 | 0.850 |
 | +gamma | 20.94 | 0.824 |
 
@@ -117,8 +119,8 @@ print(info["A"], info["omega"], info["sky_ratio"])
 src/                算法、指标、合成雾
 scripts/            生成数据、评测、处理真实图、出图
 data/               清晰图、合成图、真实雾图
-results/            metrics.csv、summary.csv、ablation.csv、图片
-tests/              几个简单的指标测试
+results/            metrics.csv、summary.csv、ablation.csv、real_metrics.csv、图片
+tests/              几个简单的测试（指标和去雾流程）
 ```
 
 ## 局限

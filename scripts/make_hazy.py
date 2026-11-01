@@ -44,7 +44,13 @@ def main():
             print(f"跳过文件名: {path.name}")
             continue
 
-        split = "test" if image_id in TEST_IDS else "tune"
+        if image_id in TEST_IDS:
+            split = "test"
+        elif image_id in TUNE_IDS:
+            split = "tune"
+        else:
+            print(f"警告: {path.name} 不在调参/测试名单里，按 tune 处理")
+            split = "tune"
         clear = cv2.imread(str(path))
         if clear is None:
             print(f"读图失败: {path}")
@@ -66,9 +72,9 @@ def main():
                     "beta": beta,
                     "level": level,
                     "seed": seed,
-                    "A_r": 0.86,
+                    "A_b": 0.86,
                     "A_g": 0.89,
-                    "A_b": 0.92,
+                    "A_r": 0.92,
                 }
             )
 

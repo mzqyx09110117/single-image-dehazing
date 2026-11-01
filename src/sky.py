@@ -58,6 +58,4 @@ def atmospheric_light_sky(img, gray, keep):
         return None
     thr = np.percentile(vals, 90)
     sel = (keep == 1) & (gray >= thr)
-    if not np.any(sel):
-        return None
     return img[sel].mean(axis=0)

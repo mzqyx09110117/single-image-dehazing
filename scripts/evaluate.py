@@ -22,7 +22,7 @@ def read_meta(path):
         return list(csv.DictReader(f))
 
 
-def run_one(gt, hazy, method, **overrides):
+def run_one(hazy, method, **overrides):
     start = time.perf_counter()
     if method == "hazy":
         out = hazy
@@ -54,7 +54,7 @@ def main():
             raise SystemExit(f"读图失败: {image} / beta={beta}")
 
         for method in ["hazy"] + METHODS:
-            out, cost = run_one(gt, hazy, method)
+            out, cost = run_one(hazy, method)
             rows.append(
                 {
                     "split": item["split"],
@@ -149,7 +149,7 @@ def main():
             beta = float(item["beta"])
             gt = cv2.imread(str(data_dir / "gt" / f"{image}.png"))
             hazy = cv2.imread(str(data_dir / "hazy" / f"{image}_b{beta}.png"))
-            out, cost = run_one(gt, hazy, "baseline", **overrides)
+            out, cost = run_one(hazy, "baseline", **overrides)
             ps.append(psnr(gt, out))
             ss.append(ssim(gt, out))
             ts.append(cost)

@@ -1,4 +1,4 @@
-image,image_id,split,beta,level,seed,A_r,A_g,A_b
+image,image_id,split,beta,level,seed,A_b,A_g,A_r
 picsum_1015,1015,tune,0.8,light,3049,0.86,0.89,0.92
 picsum_1015,1015,tune,1.4,medium,3055,0.86,0.89,0.92
 picsum_1015,1015,tune,2.0,heavy,3061,0.86,0.89,0.92

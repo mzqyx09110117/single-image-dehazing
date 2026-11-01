@@ -52,8 +52,14 @@ def colorfulness(img):
 
 
 def entropy(img):
-    """灰度直方图熵。"""
+    """灰度直方图熵，输入 uint8 或 [0,1] 浮点图。"""
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) if img.ndim == 3 else img
+    is_uint8 = gray.dtype == np.uint8
+    gray = gray.astype(np.float32)
+    # cv2.calcHist 的区间按 0-255 的灰阶来解释，浮点图先换算回 0-255
+    if not is_uint8 and float(gray.max()) <= 1.0:
+        gray *= 255.0
+    gray = np.clip(np.round(gray), 0, 255).astype(np.uint8)
     hist = cv2.calcHist([gray], [0], None, [256], [0, 256]).ravel()
     p = hist / max(hist.sum(), 1)
     p = p[p > 0]
