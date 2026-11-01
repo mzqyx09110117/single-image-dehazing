@@ -83,8 +83,10 @@ def auto_gamma(img, target=0.5, strength=0.5):
     return np.clip((1 - strength) * img + strength * out, 0, 1)
 
 
-def dehaze_image(img_bgr, method="baseline", **overrides):
+def dehaze_image(img_bgr, method="improved", **overrides):
     """对一张 BGR 图去雾，返回结果图和中间量。
+
+    method 取 "raw" / "baseline" / "improved" 或一个 DehazeConfig，默认 "improved"。
 
     返回值：
       out:  uint8 BGR 图
